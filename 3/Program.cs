@@ -40,4 +40,29 @@ Console.WriteLine("Total Value: " + totalValue);
 
 var rucksackGroups = rucksacks.Chunk(3);
 
-Console.WriteLine("Done!");
+var groupChars = new List<char>();
+
+foreach (var rucksackGroup in rucksackGroups)
+{
+    foreach (var ch in rucksackGroup[0])
+    {
+        if (rucksackGroup[1].Contains(ch) && rucksackGroup[2].Contains(ch))
+        {
+            groupChars.Add(ch);
+            break;
+        }
+    }
+}
+
+var groupTotalValue = 0;
+
+foreach (var ch in groupChars)
+{
+    var value = (int)ch % 32;
+    if (char.IsUpper(ch))
+        value = value + 26;
+    
+    groupTotalValue += value;
+}
+
+Console.WriteLine("Total Group Value: " + groupTotalValue);
